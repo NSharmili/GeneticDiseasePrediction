@@ -1,7 +1,7 @@
 <h1>GeneticDiseasePrediction</h1>
 
 
-<p style="text-align: right;">Cybercrimes are becoming more advanced, making it difficult for investigators to find and protect digital evidence. Cybercriminals use steganography to hide illegal data within digital files, making detection and recovery challenging. They often delete these files to erase evidence, further complicating investigations. To address this, this research introduces TraceForensics, a blockchain-based cybercrime investigation system designed to securely manage digital evidence. It operates in three key phases: Encoding, where hidden data is embedded in images; Decoding, where stegoanalysts extract concealed messages using forensic techniques; and Evidence Management, where investigators recover deleted files and store case details on a tamper-proof blockchain to ensure security and legal validity. The system involves Administrators, Investigators, Evidence Managers, and Judicial Authorities, ensuring a transparent and secure investigation process. By integrating stegoanalysis, forensic tools, and blockchain technology, TraceForensics enhances cybercrime investigations, ensuring evidence remains authentic, traceable, and tamper-proof.<p>
+<p style="text-align: right;">Genetic disorders occur due to changes in DNA, either inherited from parents or developed over time, leading to serious health problems. Early detection is crucial, as it allows individuals to take preventive measures, make lifestyle changes, and reduce the risk of severe diseases. This article presents a secure and intelligent system for storing genetic data of three generations using blockchain technology, ensuring data safety, integrity, and protection from unauthorized access. Since genetic data is highly sensitive, blockchain prevents tampering and ensures transparency while maintaining strict security standards. Along with secure storage, the system integrates a machine learning model using the Random Forest algorithm to predict the risk of heart diseases such as heart attacks and cardiac arrest. By analyzing genetic and health data, the model helps identify high-risk individuals, allowing for early medical intervention. The combination of blockchain and predictive analytics enhances data security, improves accessibility, and strengthens early disease detection. Experimental results confirm the effectiveness of this approach in protecting genetic information and accurately predicting heart disease risks. This system provides a scalable and intelligent framework for genetic data storage while offering valuable health insights, empowering individuals to take proactive steps in managing their health and reducing the chances of life-threatening conditions.<p>
 
 ## Table of Contents  
 1. [Introduction](#introduction)  
@@ -24,8 +24,7 @@ Blockchain ensures secure, tamper-proof storage of medical records, preventing u
 <p>
 
 <h2 id="architecture-diagram"> 2. Architecture Diagram</h2>
-<img src="https://github.com/NSharmili/TraceForensics/blob/53195622364f88db92da0555c91affed37b9acf2/Screenshot%202025-04-02%20112840.png?raw=true" 
-     alt="Architecture Diagram" width="300">
+<img src="https://github.com/bharani33/GeneticDiseasePrediction/blob/main/images/architecture.jpg?raw=true" alt="Architecture Diagram" width="300">
 <p>This diagram illustrates blockchain-based heart disease risk prediction system integrates machine learning for secure and accurate assessments. Users, including doctors and patients, register their details, which are securely stored using smart contracts to ensure data integrity and security. Doctors can access patient records, while patients can view their health data and predictions. The system employs a Random Forest classifier to analyse stored health data and predict heart disease risk, outputting "0" for no risk and "1" for potential risk. Smart contracts handle patient and doctor registration, data storage, and risk predictions, ensuring transparency and preventing unauthorized modifications. Doctor retrieve risk assessments to recommend medical interventions, while patients access reports for preventive measures. By combining blockchain’s security with machine learning’s predictive accuracy, this system offers a reliable, transparent, and efficient approach to heart disease risk management.</p>
 
  
@@ -76,14 +75,14 @@ node -v  # Check Node.js version
 npm -v   # Check npm version
 </pre>
 
-<img src="https://github.com/NSharmili/TraceForensics/blob/2104a1d6f0aa22ca39e5a7b693e99ed49e85ff91/Screenshot%202025-03-12%20133113.png?raw=true" alt="Image Alt Text" width="500">
+<img src="https://github.com/bharani33/GeneticDiseasePrediction/blob/main/images/nodeinstall.png?raw=true" alt="Image Alt Text" width="500">
 <p><strong>1. Install Truffle Globally:</strong></p>
 <pre>npm install -g truffle</pre>
 
 <p><strong>2. Verify Truffle Installation:</strong></p>
 <pre>truffle version</pre>
 
-<img src="https://github.com/NSharmili/TraceForensics/blob/33fe4954ebe67eb20af280fcc05734e1739a88b9/Screenshot%202025-03-12%20135659.png?raw=true" alt="Image Description" width="500">
+<img src="https://github.com/bharani33/GeneticDiseasePrediction/blob/main/images/truffle.png?raw=true" alt="Image Description" width="500">
 <p><strong>1. Steps to Create a Truffle Project:</strong></p>
 
 <p><strong>2. Navigate to the D: drive:</strong></p>
@@ -95,23 +94,23 @@ npm -v   # Check npm version
 <p><strong>4. Create a new project folder named SimpleStorageProject:</strong></p>
 <pre>mkdir SimpleStorageProject</pre>
 
-<img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/8556e3e0cd47b893c7b02dd8030de29815f35591/Screenshot%202025-03-12%20155851.png" 
+<img src="https://github.com/bharani33/GeneticDiseasePrediction/blob/main/images/truffle1.png?raw=true" 
      alt="Screenshot" width="500">
 <p><strong>5. Initialize a new Truffle project:</strong></p>
 <pre>truffle init</pre>
 
-<img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/73c0c96fb6fec14aa515b8707f56b8b0e72786ba/Screenshot%202025-03-12%20160248.png" 
+<img src="https://github.com/bharani33/GeneticDiseasePrediction/blob/main/images/truffle2.png?raw=true" 
      alt="Screenshot" width="500">
      
-<img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/b70c46822dc7ed7ff9ce3feb6d3cba105aeb9e47/Screenshot%202025-03-12%20160943.png" 
+<img src="https://github.com/bharani33/GeneticDiseasePrediction/blob/main/images/folders.jpg?raw=true" 
      alt="Screenshot" width="500">
 <p><strong>6. Compile the Contract:</strong></p>
 <pre>truffle compile</pre>
 
-<img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/a0ebc0ae9397ff2a0d2701198764f8497fe31b52/Screenshot%202025-03-12%20161429.png" 
+<img src="https://github.com/bharani33/GeneticDiseasePrediction/blob/main/images/truffle3.png?raw=true" 
      alt="Screenshot" width="500">
 <p><strong>Deploy to Ganache:</strong></p>
 <pre>truffle migrate --network development</pre>
 
-<img src="https://raw.githubusercontent.com/NSharmili/TraceForensics/d14b8e4758451ca56a637f7d30b4f10390e6ed29/Screenshot%202025-03-12%20161806.png" 
+<img src="https://github.com/bharani33/GeneticDiseasePrediction/blob/main/images/truffle4.png?raw=true" 
      alt="Screenshot" width="500">
