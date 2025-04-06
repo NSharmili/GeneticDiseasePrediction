@@ -7,13 +7,14 @@
 1. [Introduction](#introduction)  
 2. [Architecture Diagram](#architecture-diagram)  
 3. [Ganache Installation](#ganache-installation)  
-4. [Autopsy Installation](#autopsy-installation)  
-5. [Digital Forensics Tools, Libraries, and Frameworks](#digital-forensics-tools-libraries-and-frameworks)  
+4. [Blockchain Data Storage](#blockchain-data-storage)  
+5. [Machine Learning Model Training](#machine-learning-model-training)  
 6. [Features](#features)  
 7. [Directory Structure](#directory-structure)
    
 
-## 1. Introduction  
+ 
+<h2 id="introduction">1. Introduction</h2>
 <p>Genetic disorders result from DNA mutations, either inherited or acquired, leading to serious health risks. Early detection and prevention are crucial, allowing individuals to adopt healthier lifestyles and reduce complications. Secure genetic data storage is essential for maintaining accuracy, accessibility, and preventing misuse. 
 Advancements in healthcare technology have enabled the integration of machine learning (ML) and blockchain to enhance disease prediction and secure medical data management. This study presents an integrated framework that utilizes genetic data, routine health checkup results, and modern computational techniques to assess genetic diseases and cardiovascular risks. By leveraging these technologies, the system aims to improve the accuracy and security of health predictions.
 Machine learning has been extensively explored to enhance disease prediction and improve healthcare outcomes. Selvi et al. [1] proposed the EPERM model for heart disease prediction, which demonstrated potential in enabling early diagnosis; however, its effectiveness in real-world applications remains unverified due to a lack of validation beyond controlled environments. Mahajan and Mahajan [4] introduced a KNN-based genetic disorder prediction model that showed promise in identifying hereditary conditions but raised concerns about data privacy and security, limiting its practical application. While ML models significantly enhance predictive accuracy by identifying complex patterns in medical data, they still face several challenges, including scalability, data inefficiencies, and implementation complexities. The need for large, high-quality datasets, computational efficiency, and privacy-preserving mechanisms remains a critical consideration for improving the effectiveness and reliability of machine learning in healthcare.
@@ -28,7 +29,7 @@ Blockchain ensures secure, tamper-proof storage of medical records, preventing u
 <p>This diagram illustrates blockchain-based heart disease risk prediction system integrates machine learning for secure and accurate assessments. Users, including doctors and patients, register their details, which are securely stored using smart contracts to ensure data integrity and security. Doctors can access patient records, while patients can view their health data and predictions. The system employs a Random Forest classifier to analyse stored health data and predict heart disease risk, outputting "0" for no risk and "1" for potential risk. Smart contracts handle patient and doctor registration, data storage, and risk predictions, ensuring transparency and preventing unauthorized modifications. Doctor retrieve risk assessments to recommend medical interventions, while patients access reports for preventive measures. By combining blockchain’s security with machine learning’s predictive accuracy, this system offers a reliable, transparent, and efficient approach to heart disease risk management.</p>
 
  
-## 3. Ganache Installation  
+<h2 id="ganache-installation">3. Ganache Installation</h2> 
 <h5>Step 1: Install Ganache</h5>
 
 <p><strong>I. Download Ganache from the official Truffle Suite website:</strong>  
@@ -39,19 +40,19 @@ Blockchain ensures secure, tamper-proof storage of medical records, preventing u
 <p><strong>III. Open Ganache</strong> and create a new workspace or use the quickstart option to start a blockchain instance.</p>
 
 
-## 4. Blockchain Data Storage
+<h2 id="blockchain-data-storage">4. Blockchain Data Storage</h2>
 
 <p>The Blockchain Data Storage Module is responsible for securely storing the health records of patients across three generations. This module uses blockchain technology to ensure that all medical data—including cholesterol levels, resting blood pressure (trestbps), and ECG results (restecg)—is stored in a tamper-proof, immutable, and transparent manner. Each patient is assigned a unique ID, which links their health data to their respective family history on the blockchain.
 Smart contracts are used to manage data insertion and retrieval, ensuring only authorized interactions with the ledger. By decentralizing data storage, this module eliminates the risk of unauthorized data modification and enhances the trust and reliability of the healthcare information used in the prediction process. The data stored here is later retrieved by the machine learning module to accurately assess the risk of heart disease in the third-generation patient.
 </p>
 
 
-## 5. Machine Learning Model Training
+<h2 id="machine-learning-model-training">5. Machine Learning Model Training</h2>
 
 <p>In The Intelligent Risk Prediction for Cardiovascular Diseases Module, there are two sub modules Machine Learning Model Training and Heart Disease Risk Prediction. Machine Learning Model Training utilizes a machine learning algorithm to analyze patient data across three generations and predict the risk of heart disease in the third-generation patient. The algorithm processes key health parameters such as cholesterol level, trestbps (resting blood pressure), and restecg (resting electrocardiogram results) from previous generations to identify patterns and risk factors. Heart Disease Risk Prediction utilizes historical genetic and health data, the model determines whether the third-generation patient is at risk of developing heart disease. This predictive approach enhances early detection and preventive healthcare, ensuring more accurate and data-driven medical insights.</p>
 
 
-## 6. Features 
+<h2 id="features">6. Features</h2>
 <p><strong>1. Blockchain-Based Storage:</strong>The platform uses blockchain technology to store all case details and forensic actions in a secure, immutable ledger. This provides tamper-proof evidence management, ensuring that the integrity of the evidence is maintained, and creating a transparent, auditable record for legal use.</p>
 
 <p><strong>2. Early Detection & Preventive Care:</strong> By identifying at-risk individuals early based on family history and clinical factors, the system facilitates timely medical interventions and promotes better long-term health outcomes.</p>
@@ -61,7 +62,7 @@ Smart contracts are used to manage data insertion and retrieval, ensuring only a
 <p><strong>4.Real-Time Data Retrieval & Prediction:</strong> The system retrieves stored patient data from the blockchain and instantly generates heart disease risk predictions, streamlining the process for healthcare providers.</p>
 
 
-## 7. Directory Structure
+<h2 id="directory-structure">7. Directory Structure</h2>
 <p><strong>Steps to Deploy Smart Contracts to Ganache Using Truffle:</strong></p>
 
 <p><strong>1. Download Node.js:</strong> Visit the official site: <a href="https://nodejs.org/" target="_blank">https://nodejs.org/</a></p>
