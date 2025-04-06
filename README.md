@@ -1,4 +1,4 @@
-<h1>TraceForensics</h1>
+<h1>GeneticDiseasePrediction</h1>
 
 
 <p style="text-align: right;">Cybercrimes are becoming more advanced, making it difficult for investigators to find and protect digital evidence. Cybercriminals use steganography to hide illegal data within digital files, making detection and recovery challenging. They often delete these files to erase evidence, further complicating investigations. To address this, this research introduces TraceForensics, a blockchain-based cybercrime investigation system designed to securely manage digital evidence. It operates in three key phases: Encoding, where hidden data is embedded in images; Decoding, where stegoanalysts extract concealed messages using forensic techniques; and Evidence Management, where investigators recover deleted files and store case details on a tamper-proof blockchain to ensure security and legal validity. The system involves Administrators, Investigators, Evidence Managers, and Judicial Authorities, ensuring a transparent and secure investigation process. By integrating stegoanalysis, forensic tools, and blockchain technology, TraceForensics enhances cybercrime investigations, ensuring evidence remains authentic, traceable, and tamper-proof.<p>
@@ -14,20 +14,19 @@
    
 
 ## 1. Introduction  
-<p>In today's digital landscape, cybercrimes have become increasingly complex, posing significant challenges to cybersecurity and digital investigations. Criminals use sophisticated methods to evade detection, making it difficult for forensic investigators to recover, verify, and preserve critical evidence. One of the most concerning trends is the use of steganography, where illicit data such as financial transactions, malicious commands, or confidential information is secretly embedded within digital images or multimedia files. While traditional forensic tools can recover deleted files, they often lack the ability to ensure the security, authenticity, and traceability of evidence throughout an investigation. This limitation creates major legal and technical obstacles in prosecuting cybercriminals, necessitating a more reliable and transparent approach to digital evidence management.
-Several real-world incidents highlight the importance of a secure and tamper-proof forensic investigation framework. One such case is the Silk Road darknet marketplace, a hidden online platform used for illegal drug trade and other illicit activities. Cybercriminals communicated through encrypted messages embedded in digital images, making it difficult for law enforcement to trace their transactions. Investigators faced significant challenges in detecting these hidden messages and gathering legally admissible evidence.
-
-Another significant case is the 2014 Sony Pictures cyberattack, where hackers infiltrated the company's systems and leaked vast amounts of sensitive data. The attackers concealed malicious payloads within seemingly harmless files, allowing them to bypass security measures and access confidential corporate information. This breach demonstrated how cybercriminals exploit digital content to conduct large-scale attacks while leaving minimal forensic traces.
-Furthermore, ransomware attacks such as the 2017 WannaCry outbreak have shown how attackers use encryption and covert techniques to extort victims. The ransomware spread rapidly across networks, encrypting crucial data and demanding ransom payments in cryptocurrency. Investigators struggled to track the perpetrators due to the sophisticated methods used to obfuscate their digital footprint, underscoring the need for more effective forensic tools.
- 
-To address these challenges, our research work, TraceForensics, integrates forensic analysis with blockchain technology to create a secure, immutable, and transparent framework for handling digital evidence. The system operates in two key stages. First, TraceForensics allows investigators to recover deleted files and extract hidden data using specialized steganographic analysis techniques. This ensures that even deeply embedded information can be accurately retrieved and examined. Second, unlike traditional forensic tools that lack comprehensive evidence integrity mechanisms, our system securely records all case-related data on a blockchain. Blockchain technology guarantees that every piece of digital evidence remains unaltered, verifiable, and traceable. By establishing a decentralized ledger of forensic data, TraceForensics provides an auditable and legally admissible record of evidence, strengthening the credibility of cybercrime investigations.
-By integrating forensic methodologies with blockchain’s security features, TraceForensics enhances the accuracy and effectiveness of digital forensic investigations. The system ensures that digital evidence remains intact throughout the investigative and legal process, ultimately improving cybercrime prosecution and upholding justice. Our research encourages forensic professionals and law enforcement agencies to adopt this prototype, paving the way for a more secure and transparent digital forensic ecosystem.<p>
+<p>Genetic disorders result from DNA mutations, either inherited or acquired, leading to serious health risks. Early detection and prevention are crucial, allowing individuals to adopt healthier lifestyles and reduce complications. Secure genetic data storage is essential for maintaining accuracy, accessibility, and preventing misuse. 
+Advancements in healthcare technology have enabled the integration of machine learning (ML) and blockchain to enhance disease prediction and secure medical data management. This study presents an integrated framework that utilizes genetic data, routine health checkup results, and modern computational techniques to assess genetic diseases and cardiovascular risks. By leveraging these technologies, the system aims to improve the accuracy and security of health predictions.
+Machine learning has been extensively explored to enhance disease prediction and improve healthcare outcomes. Selvi et al. [1] proposed the EPERM model for heart disease prediction, which demonstrated potential in enabling early diagnosis; however, its effectiveness in real-world applications remains unverified due to a lack of validation beyond controlled environments. Mahajan and Mahajan [4] introduced a KNN-based genetic disorder prediction model that showed promise in identifying hereditary conditions but raised concerns about data privacy and security, limiting its practical application. While ML models significantly enhance predictive accuracy by identifying complex patterns in medical data, they still face several challenges, including scalability, data inefficiencies, and implementation complexities. The need for large, high-quality datasets, computational efficiency, and privacy-preserving mechanisms remains a critical consideration for improving the effectiveness and reliability of machine learning in healthcare.
+The proposed system predicts the likelihood of hereditary diseases and cardiovascular conditions, such as heart attacks and cardiac arrest, using intelligent data processing. To achieve this, a machine learning model, specifically the Random Forest algorithm, is employed due to its ability to handle high-dimensional medical data and capture complex relationships between genetic markers and risk factors. Random Forest, an ensemble learning method, enhances predictive accuracy by combining multiple decision trees, thereby reducing overfitting and improving robustness.
+This study highlights the use of advanced machine learning, specifically the Random Forest algorithm, to predict cardiovascular disease risks by analysing genetic markers and health records. Integrating blockchain ensures secure, transparent, and tamper-proof storage across three generations, enhancing early diagnosis and proactive healthcare decisions. This smart and scalable approach improves disease prediction and overall healthcare outcomes.
+By leveraging blockchain technology, the proposed system ensures secure, transparent, and tamper-proof genetic data storage across three generations. Additionally, an advanced Random Forest machine learning model predicts cardiovascular disease risks, enhancing early diagnosis and proactive healthcare decisions. This integrated approach provides a scalable, intelligent, and secure framework for genetic data management and disease risk prediction. 
+Blockchain ensures secure, tamper-proof storage of medical records, preventing unauthorized access and enhancing transparency. Encrypted data allows patients and providers to access reliable information securely, eliminating risks of centralized databases. The system continuously updates predictive models with new health data, ensuring accurate disease risk assessments. By integrating blockchain for secure data management and machine learning for intelligent analysis, it enables early detection, prevention, and proactive healthcare decisions, improving patient outcomes with personalized insights.
+<p>
 
 <h2 id="architecture-diagram"> 2. Architecture Diagram</h2>
 <img src="https://github.com/NSharmili/TraceForensics/blob/53195622364f88db92da0555c91affed37b9acf2/Screenshot%202025-04-02%20112840.png?raw=true" 
      alt="Architecture Diagram" width="300">
-<p>This diagram illustrates the workflow of TraceForensics, integrating file recovery, steganography detection, and blockchain-based evidence management.</p>
-<p>The proposed blockchain-based cybercrime investigation system comprises four key modules: User Registration, Case Entry, and Evidence Management. It ensures secure, tamper-proof handling of digital evidence and case details by leveraging blockchain’s transparency and immutability.</p>
+<p>This diagram illustrates blockchain-based heart disease risk prediction system integrates machine learning for secure and accurate assessments. Users, including doctors and patients, register their details, which are securely stored using smart contracts to ensure data integrity and security. Doctors can access patient records, while patients can view their health data and predictions. The system employs a Random Forest classifier to analyse stored health data and predict heart disease risk, outputting "0" for no risk and "1" for potential risk. Smart contracts handle patient and doctor registration, data storage, and risk predictions, ensuring transparency and preventing unauthorized modifications. Doctor retrieve risk assessments to recommend medical interventions, while patients access reports for preventive measures. By combining blockchain’s security with machine learning’s predictive accuracy, this system offers a reliable, transparent, and efficient approach to heart disease risk management.</p>
 
  
 ## 3. Ganache Installation  
@@ -41,40 +40,26 @@ By integrating forensic methodologies with blockchain’s security features, Tra
 <p><strong>III. Open Ganache</strong> and create a new workspace or use the quickstart option to start a blockchain instance.</p>
 
 
-## 4. Autopsy Installation
-<p><strong>I. Download Autopsy</strong></p>
-<p>Go to the official website: <a href="https://www.autopsy.com/download/" target="_blank">Autopsy Download</a></p>
-<p>Click on the Windows installer (.exe) and download it.</p>
+## 4. Blockchain Data Storage
 
-<p><strong>II. Run the Installer</strong></p>
-<p>Locate the downloaded .exe file and double-click to start the installation.</p>
-<p>Follow the on-screen instructions and accept the license agreement.</p>
-
-<p><strong>III. Complete Installation</strong></p>
-<p>Choose the installation directory (default is usually fine).</p>
-<p>Click Install and wait for the process to finish.</p>
-
-<p><strong>IV. Launch Autopsy</strong></p>
-
-<p><strong>Data Recovery in Autopsy:</strong></p>
-<p>Create a New Case → Add Data Source → Browse for Deleted Files → Use Keyword Search or Data Carving → Extract Recovered Files ✅</p>
+<p>The Blockchain Data Storage Module is responsible for securely storing the health records of patients across three generations. This module uses blockchain technology to ensure that all medical data—including cholesterol levels, resting blood pressure (trestbps), and ECG results (restecg)—is stored in a tamper-proof, immutable, and transparent manner. Each patient is assigned a unique ID, which links their health data to their respective family history on the blockchain.
+Smart contracts are used to manage data insertion and retrieval, ensuring only authorized interactions with the ledger. By decentralizing data storage, this module eliminates the risk of unauthorized data modification and enhances the trust and reliability of the healthcare information used in the prediction process. The data stored here is later retrieved by the machine learning module to accurately assess the risk of heart disease in the third-generation patient.
+</p>
 
 
-## 5. Digital Forensics Tools and Frameworks
-<p><strong>A. Forensic Tool: Autopsy</strong></p>
-<p>Autopsy is an open-source forensic tool used to recover deleted files. The process involves creating a new case, specifying the location (e.g., drive, folder, or external device), and scanning for deleted files. Autopsy extracts metadata and recovers lost data, ensuring critical evidence is preserved and analyzed effectively.</p>
-<p><strong>B. Frameworks</strong></p>
-<p>The front end of the system was developed using Flask, a lightweight and versatile Python web framework. Flask was chosen for its simplicity and its ability to integrate seamlessly with Python-based backend solutions. HTML, CSS, and JavaScript were used to design and enhance the user interface, ensuring a responsive and user-friendly design.</p>
+## 5. Machine Learning Model Training
+
+<p>In The Intelligent Risk Prediction for Cardiovascular Diseases Module, there are two sub modules Machine Learning Model Training and Heart Disease Risk Prediction. Machine Learning Model Training utilizes a machine learning algorithm to analyze patient data across three generations and predict the risk of heart disease in the third-generation patient. The algorithm processes key health parameters such as cholesterol level, trestbps (resting blood pressure), and restecg (resting electrocardiogram results) from previous generations to identify patterns and risk factors. Heart Disease Risk Prediction utilizes historical genetic and health data, the model determines whether the third-generation patient is at risk of developing heart disease. This predictive approach enhances early detection and preventive healthcare, ensuring more accurate and data-driven medical insights.</p>
 
 
 ## 6. Features 
-<p><strong>1. Integrated System:</strong> TraceForensics combines file recovery, steganography detection, and blockchain security into a unified platform, enabling investigators to efficiently recover, analyze, and secure evidence within a single workflow.</p>
+<p><strong>1. Blockchain-Based Storage:</strong>The platform uses blockchain technology to store all case details and forensic actions in a secure, immutable ledger. This provides tamper-proof evidence management, ensuring that the integrity of the evidence is maintained, and creating a transparent, auditable record for legal use.</p>
 
-<p><strong>2. Secure Evidence Handling:</strong> The system guarantees that recovered files remain authentic and unaltered. By using secure encryption and blockchain-based storage, it prevents tampering and ensures the integrity of evidence throughout the investigation.</p>
+<p><strong>2. Early Detection & Preventive Care:</strong> By identifying at-risk individuals early based on family history and clinical factors, the system facilitates timely medical interventions and promotes better long-term health outcomes.</p>
 
-<p><strong>3. Steganography Detection:</strong> TraceForensics includes advanced tools to detect and decode hidden data within digital files. This is essential for uncovering illicit information, such as financial transactions or communications, that may be concealed using steganographic methods.</p>
+<p><strong>3. Data Integrity:</strong> The system ensures data integrity by leveraging blockchain’s immutable ledger. Once patient data is stored, it cannot be altered or deleted, providing a reliable and tamper-proof record of health information. This guarantees that the multi-generational medical history used for heart disease prediction remains authentic, traceable, and verifiable, which is critical for accurate diagnosis and legal compliance.</p>
 
-<p><strong>4. Blockchain-Based Storage:</strong> The platform uses blockchain technology to store all case details and forensic actions in a secure, immutable ledger. This provides tamper-proof evidence management, ensuring that the integrity of the evidence is maintained, and creating a transparent, auditable record for legal use.</p>
+<p><strong>4.Real-Time Data Retrieval & Prediction:</strong> The system retrieves stored patient data from the blockchain and instantly generates heart disease risk predictions, streamlining the process for healthcare providers.</p>
 
 
 ## 7. Directory Structure
