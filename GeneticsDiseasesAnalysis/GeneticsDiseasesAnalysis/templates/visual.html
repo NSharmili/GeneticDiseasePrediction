@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Family Health Tree & Risk Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f7f9fc url('contactrem.jpg') no-repeat center center/cover;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    #left-panel {
+      width: 55%;
+    }
+
+    #right-panel {
+      width: 40%;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .tree-node {
+      cursor: pointer;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      margin: 10px;
+      display: inline-block;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .tree-node:hover {
+      background: #e6f7ff;
+    }
+
+    #riskChart {
+      width: 100% !important;
+      height: 350px !important;
+    }
+
+    h1 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Interactive Family Tree Visualizer</h1>
+
+  <div class="container">
+    <div id="left-panel">
+      <div id="family-tree"></div>
+      <div id="health-details"></div>
+    </div>
+
+    <div id="right-panel">
+      <h2 style="text-align: center;">Risk Dashboard</h2>
+      <canvas id="riskChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    const familyData = [
+      { name: "Sai", relation: "Grandmother", age: 66, bp: 145, chol: 216, restecg: "normal", thyroid: true, risk: 1, symptom: "shortness of breath" },
+      { name: "Anaya", relation: "Mother", age: 43, bp: 151, chol: 298, restecg: "hypertrophy", thyroid: false, risk: 0, symptom: "no symptoms" },
+      { name: "Aditya", relation: "Daughter", age: 16, bp: 120, chol: 180, restecg: "hypertrophy", thyroid: false, risk: 1, symptom: "fatigue" },
+      { name: "Saanvi", relation: "Grandmother", age: 63, bp: 141, chol: 209, restecg: "normal", thyroid: true, risk: 1, symptom: "fatigue" },
+      { name: "Meera", relation: "Mother", age: 33, bp: 134, chol: 213, restecg: "normal", thyroid: false, risk: 1, symptom: "chest pain" }
+    ];
+
+    const familyTree = document.getElementById("family-tree");
+    const healthDetails = document.getElementById("health-details");
+
+    function renderTree() {
+      familyTree.innerHTML = "";
+      familyData.forEach(member => {
+        const div = document.createElement("div");
+        div.className = "tree-node";
+        div.textContent = `${member.name} (${member.relation})`;
+        div.onclick = () => showDetails(member);
+        familyTree.appendChild(div);
+      });
+    }
+
+    function getInheritedConditions(current) {
+      const rel = current.relation.toLowerCase();
+      if (rel !== "daughter") return "";
+
+      let inheritedConditions = [];
+      const mothers = familyData.filter(m => m.relation === "Mother");
+      const grandmothers = familyData.filter(g => g.relation === "Grandmother");
+
+      const hasHighBP = [...mothers, ...grandmothers].some(m => m.bp > 140);
+      const hasThyroid = [...mothers, ...grandmothers].some(m => m.thyroid);
+
+      if (hasHighBP) inheritedConditions.push("High BP from parents or grandparents");
+      if (hasThyroid) inheritedConditions.push("Thyroid history in family");
+
+      if (inheritedConditions.length > 0) {
+        return `<p style="color: orange;"><strong>Genetic Risk Factors:</strong><br>${inheritedConditions.join("<br>")}</p>`;
+      }
+      return "";
+    }
+
+    function showDetails(member) {
+      let futureRiskMsg = "";
+      const riskColor = member.risk === 1 ? "red" : "green";
+
+      if ((member.relation === "Grandmother" || member.relation === "Mother") && member.symptom !== "no symptoms") {
+        futureRiskMsg = `<p style="color: red;"><strong>Future Generation Risk:</strong> Possible risk for offspring</p>`;
+      }
+
+      const inheritedRiskInfo = getInheritedConditions(member);
+
+      healthDetails.innerHTML = `
+        <h3>Health Data: ${member.name}</h3>
+        <p><strong>Relation:</strong> ${member.relation}</p>
+        <p><strong>Age:</strong> ${member.age}</p>
+        <p><strong>Blood Pressure:</strong> ${member.bp} ${member.bp > 140 ? '(High)' : '(Normal)'}</p>
+        <p><strong>Cholesterol:</strong> ${member.chol}</p>
+        <p><strong>RestECG:</strong> ${member.restecg}</p>
+        <p><strong>Thyroid:</strong> ${member.thyroid ? 'Yes' : 'No'}</p>
+        <p><strong>Suffering Problems:</strong> ${member.symptom}</p>
+        ${inheritedRiskInfo}
+        ${futureRiskMsg}
+        <p><strong>Risk Score:</strong> <span style="color: ${riskColor};">
+          ${member.risk === 1 ? 'At Risk' : 'No Risk'}
+        </span></p>
+      `;
+    }
+
+    const ctx = document.getElementById('riskChart').getContext('2d');
+    const riskChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: familyData.map(d => d.name),
+    datasets: [{
+      label: 'Heart Disease Risk',
+      data: familyData.map(d => 1),  // All bars full height
+      backgroundColor: familyData.map(d => d.risk === 1 ? 'red' : 'green'),
+      barThickness: 40
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 1,
+        ticks: {
+          stepSize: 1,
+          callback: value => value === 1 ? '' : ''
+        },
+          grid: {
+            display: false
+          }
+      }
+    },
+    plugins: {
+      legend: {
+        display: false
+      },
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            const person = familyData[context.dataIndex];
+            return `${person.name}: ${person.risk === 1 ? 'At Risk' : 'No Risk'}`;
+          }
+        }
+      }
+    }
+  }
+});
+
+    
+
+    renderTree();
+  </script>
+</body>
+</html>

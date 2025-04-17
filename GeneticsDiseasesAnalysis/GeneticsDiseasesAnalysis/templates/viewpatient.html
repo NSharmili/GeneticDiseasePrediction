@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blockchain Patient Registration</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.4/web3.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('contact.jpg') no-repeat center center/cover;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.15); /* Transparent white */
+      padding: 40px 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 
+        0 4px 30px rgba(0, 0, 0, 0.2),
+        0 0 20px rgba(173, 216, 230, 0.3);
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+      transition: transform 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .container:hover {
+      transform: scale(1.01);
+    }
+
+    h2 {
+      color: #0d47a1;
+      margin-bottom: 25px;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      color: #fff;
+    }
+
+    button.view {
+      background: linear-gradient(to right, #1565c0, #1e88e5);
+      box-shadow: 0 4px 10px rgba(21, 101, 192, 0.3);
+    }
+
+    button.view:hover {
+      background: linear-gradient(to right, #0d47a1, #1976d2);
+      transform: scale(1.02);
+    }
+
+    .back-button {
+      background: #e3f2fd;
+      color: #0d47a1;
+      font-weight: bold;
+      margin-top: 20px;
+      width: 140px;
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .back-button:hover {
+      background: #bbdefb;
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>VIEW REGISTERED PATIENTS</h2>
+    <form id="patientForm">
+      <button type="button" class="view" onclick="window.location.href='child.html'">View Son/Daughter</button>
+      <button type="button" class="view" onclick="window.location.href='parent.html'">View Father/Mother</button>
+      <button type="button" class="view" onclick="window.location.href='grandparent.html'">View Grandfather/Grandmother</button>
+      <button type="button" class="view" onclick="window.location.href='hereditary.html'">View Heredity Disease</button>
+      <button type="button" class="view" onclick="window.location.href='visual.html'">View Results</button>
+      <button type="button" class="view" onclick="window.location.href='features.html'">View Other Diseases</button>
+    </form>
+    <button class="back-button" onclick="goBack()">Back</button>
+  </div>
+  <script>
+    function goBack() {
+      window.location.href = "home.html";
+    }
+  </script>
+</body>
+</html>

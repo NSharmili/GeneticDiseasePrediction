@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Heart Disease Risk Assessment</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('contact.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      text-align: center;
+      color: #00796b;
+      font-size: 22px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 6px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 8px;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+
+    .result {
+      margin-top: 15px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      background: #f1f8e9;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    ul {
+      margin: 10px 0 0 20px;
+      font-size: 14px;
+    }
+
+    .content {
+      margin-top: 15px;
+      width: 100%;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Health Risk Assessment</h2>
+    <form id="riskForm" action="javascript:void(0);">
+      <label for="bp">Blood Pressure:</label>
+      <input type="number" id="bp" required>
+
+      <label for="cholesterol">Cholesterol:</label>
+      <input type="number" id="cholesterol" required>
+
+      <label for="restecg">RestECG (0 = Normal, 1 = Abnormal, 2 = Hypertrophy):</label>
+      <input type="number" id="restecg" min="0" max="2" required>
+
+      <label for="parental_diseases">Parental Diseases (comma-separated):</label>
+      <textarea id="parental_diseases" placeholder="e.g., Hypertension, Diabetes, Heart Attack"></textarea>
+
+      <!-- ✅ Predict Button -->
+      <button type="button" onclick="predictRisk()">Predict Risk</button>
+
+      <!-- ✅ Assess Button -->
+      <button type="button" onclick="assessRisk()">Assess Risk</button>
+    </form>
+
+    <!-- Content to display after assessment -->
+    <div id="output" class="result"></div>
+
+    <!-- Display parental disease info directly below the results -->
+    <div id="parentalInfoOutput" class="content"></div>
+  </div>
+
+  <script>
+    // Variable to hold risk score after prediction
+    let predictedRiskScore = null;
+
+    function predictRisk() {
+      const bp = parseInt(document.getElementById("bp").value);
+      const cholesterol = parseInt(document.getElementById("cholesterol").value);
+      const restecg = parseInt(document.getElementById("restecg").value);
+
+      let score = 0;
+
+      if (bp > 130) score++;
+      if (cholesterol > 200) score++;
+      if (restecg === 1 || restecg === 2) score++;
+
+      predictedRiskScore = score >= 2 ? 1 : 0;
+
+      document.getElementById("output").innerHTML = `<strong>Predicted Risk Score:</strong> ${predictedRiskScore}`;
+    }
+
+    function assessRisk() {
+      const bp = parseInt(document.getElementById("bp").value);
+      const cholesterol = parseInt(document.getElementById("cholesterol").value);
+      const restecg = parseInt(document.getElementById("restecg").value);
+      const parentalInput = document.getElementById("parental_diseases").value;
+
+      if (predictedRiskScore === null) {
+        document.getElementById("output").innerHTML = "Please click <strong>Predict Risk</strong> first.";
+        return;
+      }
+
+      let diseases = new Set();
+      let output = `<strong>Risk Score:</strong> ${predictedRiskScore}<br><br>`;
+
+      if (predictedRiskScore === 1) {
+        output += "<strong>Heart disease risk is present.</strong><br>";
+
+        if (bp > 130) diseases.add("High Blood Pressure (Hypertension)");
+        if (cholesterol > 200) {
+          diseases.add("Diabetes");
+          diseases.add("Thyroid Disorder");
+        }
+        if (restecg === 1) diseases.add("ECG Abnormality (Possible Heart Risk)");
+        else if (restecg === 2) diseases.add("Left Ventricular Hypertrophy (Heart Risk)");
+        else output += "RestECG is normal.<br>";
+
+        if (diseases.size > 0) {
+          output += "<br>Possible associated diseases:<ul>";
+          diseases.forEach(disease => output += `<li>${disease}</li>`);
+          output += "</ul>";
+        } else {
+          output += "No specific conditions detected, but heart risk is present.";
+        }
+
+      } else {
+        output += "<strong>No heart disease risk detected.</strong><br>";
+
+        if (cholesterol > 200) {
+          diseases.add("Diabetes");
+          diseases.add("Thyroid Disorder");
+          output += "<br>However, high cholesterol was detected.<br>";
+          output += "<br>Possible associated diseases:<ul>";
+          diseases.forEach(disease => output += `<li>${disease}</li>`);
+          output += "</ul>";
+        }
+      }
+
+      document.getElementById("output").innerHTML = output;
+
+      // Check if parental diseases are entered
+      if (parentalInput.trim() !== "") {
+        const parentalDiseases = parentalInput.split(",").map(d => d.trim()).filter(d => d.length > 0);
+        let parentalOutput = "<strong>Parental History Indicates Potential Risk Of:</strong><ul>";
+        parentalDiseases.forEach(disease => parentalOutput += `<li>${disease}</li>`);
+        parentalOutput += "</ul>";
+
+        document.getElementById("parentalInfoOutput").innerHTML = parentalOutput;
+      } else {
+        document.getElementById("parentalInfoOutput").innerHTML = "";
+      }
+    }
+  </script>
+
+</body>
+</html>

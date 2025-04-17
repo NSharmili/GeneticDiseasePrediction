@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Healthcare</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500&display=swap');
+
+        /* Background Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background: url('homebg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Title */
+        .title {
+            font-size: 36px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            animation: fadeSlide 1.5s ease-in-out;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            color: #ccc;
+            margin-bottom: 40px;
+            animation: fadeSlide 1.5s ease-in-out;
+        }
+
+        /* Options */
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-top: 10px;
+        }
+
+        .option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+            animation: floating 3s infinite ease-in-out;
+        }
+
+        .option img {
+            width: 160px;
+            height: 160px;
+            transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+        }
+
+        .option:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0px 0px 12px rgba(255, 255, 255, 0.3));
+        }
+
+        .option:active img {
+            transform: scale(1);
+            filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.5));
+        }
+
+        .option p {
+            font-size: 16px;
+            font-weight: 500;
+            margin-top: 10px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .option:hover p {
+            color: #dcdcdc;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Title and Subtitle -->
+    <h1 class="title">🔗 Blockchain Healthcare</h1>
+    <p class="subtitle">Revolutionizing Healthcare with Secure & Transparent Technology ⚕</p>
+
+    <!-- Options -->
+    <div class="options">
+        <div class="option" onclick="location.href='viewdoctor.html'">
+            <img src="doctor.png" alt="View Doctor">
+            <p>👨‍⚕ View Doctor</p>
+        </div>
+
+        <div class="option" onclick="location.href='viewpatient.html'">
+            <img src="patient.png" alt="View Patient">
+            <p>🩺 View Patient</p>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-button">⬅ Back</a>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genetic Diseases | Analysis</title>
+
+    <style>
+        /* Import Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Lora:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+        /* Reset Default Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow-x: hidden;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Dark Overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 3;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .navbar:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        /* Navigation Menu */
+        .menu {
+            margin-left: auto;
+            margin-right: 50px;
+        }
+
+        .menu ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .menu ul li {
+            margin: 0 20px;
+        }
+
+        .menu ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .menu ul li a:hover {
+            color: #ff7200;
+        }
+
+        /* Main Content */
+        .main {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            text-align: left;
+            position: relative;
+            z-index: 2;
+            padding-left: 50px;
+        }
+
+        .title, .subtitle {
+            font-size: 85px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: white;
+            font-family: 'Lora', serif;
+            text-shadow: 0 0 10px rgba(0, 204, 255, 0.8);
+            margin-bottom: 10px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Description at Bottom Left */
+        .description {
+            font-size: 20px;
+            max-width: 60%;
+            line-height: 1.6;
+            font-family: 'Poppins', sans-serif;
+            animation: slideIn 1.5s ease-in-out;
+            position: absolute;
+            bottom: 50px;
+            left: 50px;
+        }
+
+        /* To Know More Button */
+        .know-more-button {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #ff7200, #ff4500);
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 30px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 0 10px rgba(255, 114, 0, 0.5);
+            z-index: 3; /* Ensures button is above overlay */
+        }
+
+        .know-more-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(255, 114, 0, 0.9);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dark Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="menu">
+            <ul>
+                <li><a href="home.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="register.html">REGISTER</a></li>
+                
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <h1 class="title">Genetic Diseases</h1>
+        <h1 class="subtitle">ANALYSIS</h1>
+    </div>
+
+    <!-- Description at Bottom Left -->
+    <p class="description">
+        Explore advanced genetic models to improve research and medical treatments.  
+        Gain insights into DNA patterns and genetic disorders with precision.
+    </p>
+
+    <!-- To Know More Button -->
+    <a href="know-more.html" class="know-more-button">To Know More</a>
+
+</body>
+</html>

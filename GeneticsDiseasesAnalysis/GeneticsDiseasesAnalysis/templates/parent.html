@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blockchain Patient Registration</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.4/web3.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: url('contact.jpg') no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      padding: 30px;
+      width: 100%;
+      max-width: 420px;
+      color: #0d47a1;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #0d47a1;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    input {
+      background: rgba(255, 255, 255, 0.85);
+      color: #333;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: linear-gradient(135deg, #1e88e5, #1565c0);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #1565c0, #0d47a1);
+      transform: scale(1.03);
+    }
+
+    .back-button {
+      margin: 20px auto 0 auto;
+      width: 130px;
+      display: block;
+    }
+
+    #output {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form id="grandparentDetailsForm">
+      <h2>Retrieve Parent Details</h2>
+      <input type="text" id="searchName" placeholder="Enter Patient Name" required />
+      <button type="button" onclick="getPatientDetails()">Get Patient Details</button>
+    </form>
+
+    <div id="output"></div>
+
+    <button class="back-button" onclick="goBack()">Back</button>
+  </div>
+
+  <script>
+    function goBack() {
+      window.location.href = "viewpatient.html";
+    }
+    </script>
+
+
+    <script>
+        let web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545')); 
+        const contractAddress = "0x92a33642f4e6F61215612cBd514DE38f8ad52795"; // Update after deploying
+
+        const contractABI = [{
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "relation",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "age",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "dob",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "cholesterol",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "restECG",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "bloodPressure",
+          "type": "uint256"
+        }
+      ],
+      "name": "PatientRegistered",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_name",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_relation",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_age",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_dob",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_cholesterol",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_restECG",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_bloodPressure",
+          "type": "uint256"
+        }
+      ],
+      "name": "registerPatient",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_name",
+          "type": "string"
+        }
+      ],
+      "name": "getPatientDetails",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_name",
+          "type": "string"
+        }
+      ],
+      "name": "getPatientExists",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    }];
+
+        const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+        async function registerPatient() {
+            try {
+                const accounts = await web3.eth.getAccounts();
+                const sender = accounts[0];
+
+                const name = document.getElementById("name").value.trim();
+                const relation = document.getElementById("relation").value.trim();
+                const age = parseInt(document.getElementById("age").value);
+                const dob = document.getElementById("dob").value.trim();
+                const cholesterol = parseInt(document.getElementById("cholesterol").value);
+                const restECG = parseInt(document.getElementById("restECG").value);
+                const bloodPressure = parseInt(document.getElementById("bloodPressure").value);
+
+                console.log("Registering Patient:", { name, relation, age, dob, cholesterol, restECG, bloodPressure });
+
+                await contract.methods.registerPatient(name, relation, age, dob, cholesterol, restECG, bloodPressure)
+                    .send({ from: sender, gas: 1000000 });
+
+                document.getElementById("output").innerText = `✅ Patient ${name} (${relation}) registered successfully.`;
+            } catch (error) {
+                console.error("❌ Registration Error:", error);
+                document.getElementById("output").innerText = "❌ Registration Failed!";
+            }
+        }
+
+        async function getPatientDetails() {  // ✅ Matches ABI function name
+
+            try {
+                const name = document.getElementById("searchName").value.trim();
+                console.log("Fetching patient:", name);
+
+                const result = await contract.methods.getPatientDetails(name).call();
+                console.log("Patient Data:", result);
+
+                document.getElementById("output").innerText = `✅ Patient: ${result[0]}, Relation: ${result[1]}, Age: ${result[2]}, DOB: ${result[3]}, Cholesterol: ${result[4]}, RestECG: ${result[5]}, Blood Pressure: ${result[6]}`;
+            } catch (error) {
+                console.error("❌ Retrieval Error:", error);
+                document.getElementById("output").innerText = "❌ Patient not found!";
+            }
+        }
+    </script>
+
+</body>
+</html>

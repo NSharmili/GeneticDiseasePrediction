@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Registration & About Us</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.4/web3.min.js"></script>
+
+    <style>
+        /* Import Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #1a1a1a, #333);
+            margin: 0;
+            padding: 0;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Container - Glassmorphism Effect */
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+            margin-bottom: 40px;
+        }
+
+        /* Header Styling */
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #007BFF;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Input Fields */
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.2);
+            outline: none;
+        }
+
+        textarea {
+            height: 120px;
+            resize: none;
+        }
+
+        /* Error Messages */
+        .error {
+            color: red;
+            font-size: 14px;
+            display: none;
+            margin-top: -5px;
+        }
+
+        /* Buttons */
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        button {
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.3s;
+            width: 48%;
+            margin-bottom: 10px;
+        }
+
+        .btn-register {
+            background: #007BFF;
+            color: white;
+        }
+
+        .btn-register:hover {
+            background: #0056b3;
+        }
+
+        .btn-view {
+            background: #28A745;
+            color: white;
+        }
+
+        .btn-view:hover {
+            background: #218838;
+        }
+
+        /* Back Button */
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background: #00aaff;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            box-shadow: 0 5px 10px rgba(0, 170, 255, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .back-button:hover {
+            background: #0088cc;
+            transform: scale(1.08);
+            box-shadow: 0 8px 18px rgba(0, 170, 255, 0.5);
+        }
+
+        /* About Section */
+        .about-section {
+            width: 85%;
+            max-width: 1200px;
+            padding: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+		/* About Us Title */
+.title-container {
+    position: absolute;
+    top: 50px; /* Adjusted to be higher */
+    left: 50px; /* Ensures it stays at the top-left */
+}
+
+.title-container h1 {
+    font-size: 42px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: white;
+    text-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+    border-bottom: 2px solid #00aaff;
+    display: inline-block;
+    padding-bottom: 5px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.title-container h1:hover {
+    transform: scale(1.05);
+}
+
+
+        
+
+        /* Image Styling */
+        .about-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 170, 255, 0.3);
+        }
+
+        /* Text Content */
+        .text-content {
+            max-width: 550px;
+            text-align: left;
+            color: white;
+            padding-left: 30px;
+        }
+
+        .text-content h2, .text-content h3 {
+            color: #00aaff;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            border-left: 3px solid #00aaff;
+            padding-left: 12px;
+        }
+
+        .text-content p {
+            color: #ddd;
+            line-height: 1.75;
+            font-size: 18px;
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    
+
+    <!-- About Section -->
+    <div class="title-container">
+        <h1>About Us</h1>
+    </div>
+    <section class="about-section">
+        <img src="https://th.bing.com/th/id/OIP.VCg6aCuyOybFoBAkouKwGAHaEK?w=277&h=180&c=7&r=0&o=5&pid=1.7" 
+             alt="Genetics Research" class="about-image">
+        <div class="text-content">
+            <h2>Our Journey in Genetics</h2>
+                  <p>
+                Genetics Data Analysis has been a transformative experience. From humble beginnings,
+                we have tackled complex problems and made significant strides in genomics
+                and personalized medicine. With each discovery, we are reminded of the endless possibilities genetics holds 
+                for understanding life and shaping the future of healthcare.
+            </p>
+            <h3><b>Our Mission</b></h3>
+            <p>
+                Our mission is to advance genetic research, create innovative therapies, and promote 
+                understanding of genetics' role in health and disease. Using cutting-edge technologies, 
+                we aim to improve lives by unlocking the potential of genetic science.
+				</p>
+        </div>
+    </section>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-button">Back</a>
+
+</body>
+</html>

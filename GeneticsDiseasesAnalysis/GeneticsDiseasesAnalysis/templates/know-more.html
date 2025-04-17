@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Wellness Guide</title>
+
+    <style>
+        /* Import Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        /* Universal Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #121212; /* Deep Charcoal */
+            color: #EAEAEA; /* Soft White */
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 40px;
+        }
+
+        /* Glassmorphic Content Box */
+        .container {
+            max-width: 680px; /* Increased width */
+            padding: 35px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1); /* Dark Transparent */
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1.2s ease-in-out;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        /* Heartbeat Animation */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.05); }
+            50% { transform: scale(0.98); }
+            70% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Title with Heartbeat Effect */
+        h1 {
+            color: #5CB8B2; /* Soothing Teal */
+            font-size: 26px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            animation: heartbeat 2s infinite ease-in-out;
+        }
+
+        h2 {
+            color: #5CB8B2;
+            font-size: 20px;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+        /* List Styling */
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        ul li {
+            font-size: 16px;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 1.2s ease-in-out forwards;
+            color: #EAEAEA;
+        }
+
+        ul li::before {
+            content: "✔";
+            color: #5CB8B2;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        ul li:nth-child(1) { animation-delay: 0.2s; }
+        ul li:nth-child(2) { animation-delay: 0.4s; }
+        ul li:nth-child(3) { animation-delay: 0.6s; }
+
+        /* Inspirational Message */
+        .message {
+            font-size: 16px;
+            margin-top: 15px;
+            color: #EAEAEA;
+            font-weight: 500;
+        }
+
+        /* Subtle Floating Animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: linear-gradient(to right, #5CB8B2, #418B88);
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 30px;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button:hover {
+            background: linear-gradient(to right, #418B88, #5CB8B2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(6px); }
+            100% { transform: translateY(0px); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container floating">
+        <h1>💙 Your Heart, Your Strength</h1>
+
+        <h2>🌿 Daily Heart Care</h2>
+        <ul>
+            <li>Regular check-ups ensure early care.</li>
+            <li>Balanced meals & movement keep the heart active.</li>
+            <li>Calm mind, strong heart—reduce stress.</li>
+        </ul>
+
+        <h2>🚦 Recognize Early Signs</h2>
+        <ul>
+            <li>Unusual tightness or discomfort in the chest.</li>
+            <li>Shortness of breath or sudden fatigue.</li>
+            <li>Dizziness, cold sweats, or nausea.</li>
+        </ul>
+
+        <p class="message">🌟 A happy heart leads to a healthy life. Prioritize your well-being. 🌟</p>
+
+        <a href="index.html" class="back-button">Back to Home</a>
+    </div>
+
+</body>
+</html>

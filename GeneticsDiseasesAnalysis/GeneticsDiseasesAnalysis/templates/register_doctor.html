@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Registration</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.4/web3.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('contact.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Form Container */
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 400px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        /* Header */
+        h2 {
+            color: #007BFF;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        /* Form Inputs */
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.8);
+            transition: 0.3s;
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.2);
+            outline: none;
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-register {
+            background: #007BFF;
+            color: white;
+        }
+
+        .btn-register:hover {
+            background: #0056b3;
+        }
+
+        .btn-view {
+            background: #28A745;
+            color: white;
+        }
+
+        .btn-view:hover {
+            background: #218838;
+        }
+
+        .btn-prescription {
+            background: #FF5733;
+            color: white;
+        }
+
+        .btn-prescription:hover {
+            background: #C70039;
+        }
+
+        /* Back Button */
+        .btn-back {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #007BFF; /* Same as Register button */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3); /* Added shadow effect */
+        }
+
+        .btn-back:hover {
+            background: #0056b3; /* Darker shade on hover */
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.4); /* Increased shadow effect */
+        }
+
+        /* Doctor Details */
+        #doctorDetails {
+            margin-top: 20px;
+            text-align: left;
+            display: none;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        /* Fade In Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Doctor Registration</h2>
+
+        <form id="doctorForm">
+            <input type="text" id="doctorName" placeholder="Doctor Name" maxlength="50" required>
+            <input type="text" id="doctorDesignation" placeholder="Designation" maxlength="50" required>
+            <button type="button" class="btn btn-register" onclick="registerDoctor()">Register</button>
+        </form>
+
+        
+        
+    </div>
+
+    <!-- Back Button -->
+    <button class="btn-back" onclick="goBack()">Back</button>
+
+    <script>
+        const web3 = new Web3('HTTP://127.0.0.1:7545'); // Ganache RPC
+
+        const contractABI = [
+            {
+                "inputs": [
+                    { "internalType": "string", "name": "_name", "type": "string" },
+                    { "internalType": "string", "name": "_designation", "type": "string" }
+                ],
+                "name": "registerDoctor",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [{ "internalType": "string", "name": "_name", "type": "string" }],
+                "name": "getDoctorDetails",
+                "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+                "stateMutability": "view",
+                "type": "function"
+            }
+        ];
+
+        const contractAddress = "0x62Bf4F53D64E7b8e35D3010F4572721026fF748f";
+        const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+        async function registerDoctor() {
+            const accounts = await web3.eth.getAccounts();
+            const name = document.getElementById("doctorName").value;
+            const designation = document.getElementById("doctorDesignation").value;
+
+            if (!name || !designation) {
+                alert("Please enter all details.");
+                return;
+            }
+
+            try {
+                await contract.methods.registerDoctor(name, designation).send({ from: accounts[0] });
+                alert("Doctor Registered Successfully!");
+            } catch (error) {
+                console.error("Registration failed:", error);
+            }
+        }
+
+        async function viewDoctor() {
+            const doctorName = document.getElementById("searchDoctorName").value;
+
+            if (!doctorName) {
+                alert("Please enter the doctor’s name.");
+                return;
+            }
+
+            try {
+                const designation = await contract.methods.getDoctorDetails(doctorName).call();
+
+                if (designation) {
+                    document.getElementById("doctorDetails").innerHTML = `
+                        <p><strong>Name:</strong> ${doctorName}</p>
+                        <p><strong>Designation:</strong> ${designation}</p>
+                    `;
+                    document.getElementById("doctorDetails").style.display = "block";
+                } else {
+                    document.getElementById("doctorDetails").innerHTML = "Doctor not found!";
+                }
+            } catch (error) {
+                console.error("Error fetching doctor details:", error);
+                document.getElementById("doctorDetails").innerHTML = "Doctor not found!";
+            }
+        }
+
+        function openPrescription() {
+            window.location.href = "prescription.html"; // Update with actual prescription page
+        }
+
+        function goBack() {
+            window.location.href = "register.html"; // Redirects to the home page
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Heart Disease Risk Prediction</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('contact.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      overflow-y: auto;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px 25px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 1200px;
+      margin: 40px auto;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 28px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .generation-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .generation {
+      background: #f0f0f0;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s;
+    }
+
+    .generation:hover {
+      transform: scale(1.02);
+    }
+
+    h3 {
+      text-align: center;
+      font-size: 20px;
+      color: #444;
+      margin: 5px 0 10px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 6px;
+      border: 1px solid #bbb;
+      font-size: 14px;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #2196f3;
+      box-shadow: 0 0 4px #2196f377;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border-radius: 6px;
+      border: none;
+      background: linear-gradient(to right, #76b4f3, #3e8ed0);
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #4a9add, #397fbe);
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    #patientTable {
+      width: 100%;
+      margin-top: 25px;
+      border-collapse: collapse;
+      display: none;
+    }
+
+    #patientTable th,
+    #patientTable td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    #patientTable th {
+      background-color: #2196f3;
+      color: white;
+    }
+
+    #predictionResult {
+      display: none;
+      margin-top: 25px;
+      padding: 15px;
+      background-color: #e6f7ff;
+      border-left: 5px solid #2196f3;
+      font-size: 16px;
+    }
+
+    .back-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 18px;
+      background-color: #f44336;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+    }
+
+    .back-button:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Heart Disease Risk Prediction</h2>
+
+    <div class="generation-container">
+      <!-- Grandparent -->
+      <div class="generation">
+        <h3>Grandparent</h3>
+        
+        <input type="text" id="gen1Name" placeholder="Full Name" required />
+        <input type="text" id="gen1Relation" placeholder="e.g., Grandfather/Grandmother" required />
+        <input type="number" id="gen1Age" placeholder="Age in years" required />
+        <input type="number" id="gen1BP" placeholder="Blood Pressure" required />
+        <input type="number" id="gen1Chol" placeholder="Cholesterol Level" required />
+        <select id="gen1RestECG">
+          <option value="" disabled selected hidden>Select Rest ECG Result</option>
+          <option value="normal">Normal (0)</option>
+          <option value="abnormal">Abnormal (1)</option>
+          <option value="hypertrophy">Hypertrophy (2)</option>
+        </select>
+        <button onclick="registerPatient(1)">Submit</button>
+      </div>
+
+      <!-- Parent -->
+      <div class="generation">
+        <h3>Parent</h3>
+        
+        <input type="text" id="gen2Name" placeholder="Full Name" required />
+        <input type="text" id="gen2Relation" placeholder="e.g., Father/Mother" required />
+        <input type="number" id="gen2Age" placeholder="Age in years" required />
+        <input type="number" id="gen2BP" placeholder="Blood Pressure" required />
+        <input type="number" id="gen2Chol" placeholder="Cholesterol Level" required />
+        <select id="gen2RestECG">
+          <option value="" disabled selected hidden>Select Rest ECG Result</option>
+          <option value="normal">Normal (0)</option>
+          <option value="abnormal">Abnormal (1)</option>
+          <option value="hypertrophy">Hypertrophy (2)</option>
+        </select>
+        <button onclick="registerPatient(2)">Submit</button>
+      </div>
+
+      <!-- You -->
+      <div class="generation">
+        <h3>You</h3>
+       
+        <input type="text" id="gen3Name" placeholder="Full Name" required />
+        <input type="text" id="gen3Relation" placeholder="e.g., Self" required />
+        <input type="number" id="gen3Age" placeholder="Age in years" required />
+        <input type="number" id="gen3BP" placeholder="Blood Pressure" required />
+        <input type="number" id="gen3Chol" placeholder="Cholesterol Level" required />
+        <select id="gen3RestECG">
+          <option value="" disabled selected hidden>Select Rest ECG Result</option>
+          <option value="normal">Normal (0)</option>
+          <option value="abnormal">Abnormal (1)</option>
+          <option value="hypertrophy">Hypertrophy (2)</option>
+        </select>
+        <button onclick="registerPatient(3)">Submit</button>
+      </div>
+    </div>
+
+    <!-- Patient Table -->
+    <table id="patientTable">
+      <thead>
+        <tr>
+         
+          <th>Name</th>
+          <th>Relation</th>
+          <th>Age</th>
+          <th>Blood Pressure</th>
+          <th>Cholesterol</th>
+          <th>Rest ECG</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="buttons">
+      <button onclick="predictRisk()">Predict Risk</button>
+    </div>
+
+    <div id="predictionResult">
+      <h3>Prediction Result</h3>
+      <p><strong>Risk Score:</strong> <span id="riskScore"></span></p>
+    </div>
+  </div>
+
+ 
+</body>
+</html>
+
+
+<script>
+    
+
+    function registerPatient(gen) {
+        //let uniqueId = document.getElementById(`gen${gen}UniqueId`).value;
+        let name = document.getElementById(`gen${gen}Name`).value;
+        let relation = document.getElementById(`gen${gen}Relation`).value;
+        let age = document.getElementById(`gen${gen}Age`).value;
+        let bp = document.getElementById(`gen${gen}BP`).value;
+        let chol = document.getElementById(`gen${gen}Chol`).value;
+        let restECG = document.getElementById(`gen${gen}RestECG`).value;
+
+        if (!name || !relation || !age || !bp || !chol) {
+            alert("Please fill in all fields before registering.");
+            return;
+        }
+
+        let table = document.getElementById("patientTable");
+        let tbody = table.querySelector("tbody");
+        let newRow = tbody.insertRow();
+        newRow.innerHTML = `<td>${name}</td><td>${relation}</td><td>${age}</td><td>${bp}</td><td>${chol}</td><td>${restECG}</td>`;
+
+        table.style.display = "table"; 
+        alert(`Patient of Generation ${gen} submitted successfully!`);
+    }
+</script>
+<script>
+async function predictRisk() {
+try {
+ // Get input elements with correct IDs
+ const gen1Age = document.getElementById("gen1Age");
+ const gen1BP = document.getElementById("gen1BP");
+ const gen1Chol = document.getElementById("gen1Chol");
+ const gen1RestECG = document.getElementById("gen1RestECG");
+
+ const gen2Age = document.getElementById("gen2Age");
+ const gen2BP = document.getElementById("gen2BP");
+ const gen2Chol = document.getElementById("gen2Chol");
+ const gen2RestECG = document.getElementById("gen2RestECG");
+
+ const gen3Age = document.getElementById("gen3Age");
+ const gen3BP = document.getElementById("gen3BP");
+ const gen3Chol = document.getElementById("gen3Chol");
+ const gen3RestECG = document.getElementById("gen3RestECG");
+
+ // Check if elements exist
+ if (!gen1Age || !gen1BP || !gen1Chol || !gen1RestECG ||
+     !gen2Age || !gen2BP || !gen2Chol || !gen2RestECG ||
+     !gen3Age || !gen3BP || !gen3Chol || !gen3RestECG) {
+     console.error("One or more input fields are missing!");
+     alert("Error: Some input fields are missing. Please check your form.");
+     return;
+ }
+
+ // Prepare JSON payload
+ const predictionPayload = {
+     gen1: {
+         age: parseInt(gen1Age.value, 10),
+         bloodPressure: parseInt(gen1BP.value, 10),
+         cholesterol: parseInt(gen1Chol.value, 10),
+         restECG: gen1RestECG.value
+     },
+     gen2: {
+         age: parseInt(gen2Age.value, 10),
+         bloodPressure: parseInt(gen2BP.value, 10),
+         cholesterol: parseInt(gen2Chol.value, 10),
+         restECG: gen2RestECG.value
+     },
+     gen3: {
+         age: parseInt(gen3Age.value, 10),
+         bloodPressure: parseInt(gen3BP.value, 10),
+         cholesterol: parseInt(gen3Chol.value, 10),
+         restECG: gen3RestECG.value
+     }
+ };
+
+ console.log("Sending data for prediction:", JSON.stringify(predictionPayload));
+
+ // Send request to backend
+ const response = await fetch("http://127.0.0.1:8000/predict", {
+     method: "POST",
+     headers: { "Content-Type": "application/json" },
+     body: JSON.stringify(predictionPayload)
+ });
+
+ if (!response.ok) {
+     const errorData = await response.json();
+     console.error("Error from server:", errorData);
+     alert("Error: " + (errorData.detail || "Unknown error"));
+     return;
+ }
+
+ const result = await response.json();
+ console.log("Prediction response:", result);
+
+ document.getElementById("riskScore").textContent = result.prediction;
+ document.getElementById("predictionResult").style.display = "block";
+
+} catch (error) {
+ console.error("Error predicting disease risk:", error);
+ alert("Prediction failed. Check console for details.");
+}
+}
+
+// Ensure DOM is fully loaded before adding event listener
+document.addEventListener("DOMContentLoaded", function () {
+document.getElementById("predictRisk").addEventListener("click", predictRisk);
+});
+
+
+</script>
+</body>
+</html>
